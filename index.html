@@ -143,6 +143,40 @@
   .pilier li svg{flex:none;color:var(--vert);margin-top:3px;}
   .pilier-cta{margin-top:auto;}
 
+  /* CATALOGUE */
+  .catalogue-intro{display:flex;flex-wrap:wrap;gap:14px;margin:28px 0 8px;}
+  .catalogue-chip{
+    background:#fff;border:1px solid #E7E0CF;border-radius:999px;padding:9px 16px;
+    font-size:13.5px;font-weight:700;color:var(--texte-sombre);display:flex;align-items:center;gap:8px;
+  }
+  .catalogue-chip strong{color:var(--ambre-fonce);font-family:'Barlow Condensed';font-size:16px;}
+  .catalogue-cats{display:grid;gap:20px;margin-top:28px;}
+  @media(min-width:760px){ .catalogue-cats{grid-template-columns:repeat(2,1fr);} }
+  .cat-carte{background:#fff;border:1px solid #E7E0CF;border-radius:16px;padding:0;overflow:hidden;}
+  .cat-carte summary{
+    cursor:pointer;list-style:none;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .cat-carte summary::-webkit-details-marker{display:none;}
+  .cat-carte summary::after{content:"+";font-size:22px;color:var(--ambre-fonce);flex:none;}
+  .cat-carte[open] summary::after{content:"–";}
+  .cat-carte summary .cat-num{
+    font-family:'Barlow Condensed';font-size:13px;font-weight:700;color:#fff;background:var(--nuit);
+    border-radius:999px;padding:3px 10px;margin-right:10px;
+  }
+  .cat-carte summary h4{margin:0;font-size:19px;font-family:'Work Sans';font-weight:700;text-transform:none;letter-spacing:0;flex:1;}
+  .cat-carte summary span.cat-count{font-size:12.5px;color:#888;font-weight:600;white-space:nowrap;}
+  .cat-produits{list-style:none;margin:0;padding:0 24px 22px;display:flex;flex-direction:column;gap:12px;border-top:1px solid #EFEAE0;}
+  .cat-produits li{padding-top:12px;display:flex;flex-direction:column;gap:2px;}
+  .cat-produits li:first-child{padding-top:16px;}
+  .produit-nom{font-weight:700;font-size:14.5px;}
+  .produit-prix{font-size:13px;color:var(--ambre-fonce);font-weight:600;}
+  .catalogue-cta{
+    margin-top:32px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+    background:var(--nuit);color:var(--papier);border-radius:18px;padding:26px 28px;justify-content:space-between;
+  }
+  .catalogue-cta p{margin:0;font-size:15px;color:#CFCBC0;max-width:460px;}
+  .catalogue-cta-actions{display:flex;flex-wrap:wrap;gap:12px;}
+
   /* CAS D'USAGE - journee */
   .journee{position:relative;margin-top:44px;}
   .journee-ligne{position:absolute;left:19px;top:6px;bottom:6px;width:2px;background:#E1D9C6;}
@@ -189,8 +223,15 @@
   /* PORTFOLIO TEASER */
   .realisations-grid{display:grid;gap:18px;margin-top:32px;}
   @media(min-width:760px){ .realisations-grid{grid-template-columns:repeat(3,1fr);} }
-  .realisation-card{border-radius:16px;overflow:hidden;border:1px solid #E7E0CF;background:#fff;}
-  .realisation-thumb{height:140px;background:linear-gradient(135deg,var(--acier),var(--nuit));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Barlow Condensed';font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
+  .realisation-card{border-radius:16px;overflow:hidden;border:1px solid #E7E0CF;background:#fff;display:block;text-decoration:none;color:inherit;transition:transform .15s ease, box-shadow .15s ease;}
+  .realisation-card:hover{transform:translateY(-3px);box-shadow:var(--ombre);}
+  .realisation-thumb{height:140px;background:linear-gradient(135deg,var(--acier),var(--nuit));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Barlow Condensed';font-size:14px;letter-spacing:.08em;text-transform:uppercase;position:relative;}
+  .realisation-thumb::after{
+    content:"Voir le site →";position:absolute;inset:auto 0 0 0;padding:8px 14px;
+    background:rgba(25,27,31,.78);color:var(--ambre);font-family:'Work Sans';font-weight:700;
+    font-size:12px;text-transform:none;letter-spacing:0;opacity:0;transition:opacity .15s ease;
+  }
+  .realisation-card:hover .realisation-thumb::after{opacity:1;}
   .realisation-body{padding:16px 18px;}
   .realisation-body h4{margin:0 0 4px;font-size:16px;}
   .realisation-body p{margin:0;font-size:13.5px;color:#777;}
@@ -249,6 +290,7 @@
     </a>
     <nav class="nav-liens">
       <a href="#offres">Offres</a>
+      <a href="#catalogue">Catalogue</a>
       <a href="#journee">Exemples</a>
       <a href="#avis">Avis</a>
       <a href="#realisations">Réalisations</a>
@@ -340,8 +382,76 @@
     </div>
   </section>
 
+  <!-- CATALOGUE -->
+  <section id="catalogue" class="section" style="background:var(--papier2);">
+    <div class="conteneur">
+      <p class="eyebrow">Le catalogue complet</p>
+      <h2 class="h2">4 catégories, 19 produits, un prix affiché pour chacun</h2>
+      <p class="lead">Chaque produit est une tâche précise que l'assistant fait pour vous, tous les jours. Vous piochez ce qui vous fait gagner du temps, vous ajoutez le reste quand vous voulez.</p>
+
+      <div class="catalogue-intro">
+        <span class="catalogue-chip"><strong>4</strong> catégories</span>
+        <span class="catalogue-chip"><strong>19</strong> produits</span>
+        <span class="catalogue-chip"><strong>5 à 15 j</strong> de mise en place</span>
+        <span class="catalogue-chip">Prix HT, installation + mois</span>
+      </div>
+
+      <div class="catalogue-cats">
+        <details class="cat-carte" open>
+          <summary><span class="cat-num">01</span><h4>Trouver des clients</h4><span class="cat-count">5 produits</span></summary>
+          <ul class="cat-produits">
+            <li><span class="produit-nom">Campagne de mails ciblés</span><span class="produit-prix">690 € HT, puis 190 €/mois</span></li>
+            <li><span class="produit-nom">Veille des marchés publics</span><span class="produit-prix">290 € HT, puis 90 €/mois</span></li>
+            <li><span class="produit-nom">Réponse aux appels d'offres</span><span class="produit-prix">dès 490 € HT par dossier</span></li>
+            <li><span class="produit-nom">Relance des anciens clients</span><span class="produit-prix">390 € HT, puis 60 €/mois</span></li>
+            <li><span class="produit-nom">Avis Google après chantier</span><span class="produit-prix">290 € HT, puis 40 €/mois</span></li>
+          </ul>
+        </details>
+
+        <details class="cat-carte">
+          <summary><span class="cat-num">02</span><h4>Répondre aux clients</h4><span class="cat-count">4 produits</span></summary>
+          <ul class="cat-produits">
+            <li><span class="produit-nom">Réponse aux demandes en 5 minutes</span><span class="produit-prix">790 € HT, puis 120 €/mois</span></li>
+            <li><span class="produit-nom">Relance des devis sans réponse</span><span class="produit-prix">390 € HT, puis 60 €/mois</span></li>
+            <li><span class="produit-nom">Prise de rendez-vous en ligne</span><span class="produit-prix">390 € HT, puis 40 €/mois</span></li>
+            <li><span class="produit-nom">Suivi SAV</span><span class="produit-prix">590 € HT, puis 90 €/mois</span></li>
+          </ul>
+        </details>
+
+        <details class="cat-carte">
+          <summary><span class="cat-num">03</span><h4>Se faire connaître</h4><span class="cat-count">4 produits</span></summary>
+          <ul class="cat-produits">
+            <li><span class="produit-nom">Site vitrine</span><span class="produit-prix">890 € HT, puis 29 €/mois</span></li>
+            <li><span class="produit-nom">Site avec un outil</span><span class="produit-prix">1 490 € HT, puis 29 €/mois</span></li>
+            <li><span class="produit-nom">Fiche Google et post chaque semaine</span><span class="produit-prix">290 € HT, puis 90 €/mois</span></li>
+            <li><span class="produit-nom">Posts réseaux sociaux</span><span class="produit-prix">390 € HT, puis 120 €/mois</span></li>
+          </ul>
+        </details>
+
+        <details class="cat-carte">
+          <summary><span class="cat-num">04</span><h4>S'organiser</h4><span class="cat-count">6 produits</span></summary>
+          <ul class="cat-produits">
+            <li><span class="produit-nom">Tri des mails</span><span class="produit-prix">990 € HT, puis 140 €/mois</span></li>
+            <li><span class="produit-nom">Classement des documents</span><span class="produit-prix">450 € HT, puis 60 €/mois</span></li>
+            <li><span class="produit-nom">Compte rendu du matin</span><span class="produit-prix">290 € HT, puis 40 €/mois</span></li>
+            <li><span class="produit-nom">Relance des factures impayées</span><span class="produit-prix">390 € HT, puis 60 €/mois</span></li>
+            <li><span class="produit-nom">Factures fournisseurs au comptable</span><span class="produit-prix">390 € HT, puis 60 €/mois</span></li>
+            <li><span class="produit-nom">Veille des prix fournisseurs</span><span class="produit-prix">690 € HT, puis 90 €/mois</span></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="catalogue-cta">
+        <p>Le catalogue complet en PDF : description, délai de mise en place et prix de chaque produit, plus le pack cœur et l'offre de lancement.</p>
+        <div class="catalogue-cta-actions">
+          <a class="btn btn--ambre" href="https://metastep.fr/catalogue.pdf" target="_blank" rel="noopener">Télécharger le catalogue PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CAS D'USAGE : une journee -->
-  <section id="journee" class="section" style="background:var(--papier2);">
+  <section id="journee" class="section">
     <div class="conteneur">
       <p class="eyebrow">Concret, pas de discours</p>
       <h2 class="h2">Une journée avec un assistant MetaStep</h2>
@@ -430,20 +540,20 @@
       <h2 class="h2">Des exemples de sites, pas des promesses</h2>
       <p class="lead">Sites de démonstration (entreprises fictives) pour montrer le rendu réel avant de vous engager.</p>
       <div class="realisations-grid">
-        <div class="realisation-card">
+        <a class="realisation-card" href="https://metastep.fr/realisations" target="_blank" rel="noopener">
           <div class="realisation-thumb">Vitrine BTP</div>
           <div class="realisation-body"><h4>Site vitrine couverture</h4><p>5 pages, bouton d'appel, zone d'intervention</p></div>
-        </div>
-        <div class="realisation-card">
+        </a>
+        <a class="realisation-card" href="https://metastep.fr/realisations" target="_blank" rel="noopener">
           <div class="realisation-thumb">Site + simulateur</div>
           <div class="realisation-body"><h4>Site avec devis en ligne</h4><p>Simulateur de prix, demande qualifiée par mail</p></div>
-        </div>
-        <div class="realisation-card">
+        </a>
+        <a class="realisation-card" href="https://metastep.fr/realisations" target="_blank" rel="noopener">
           <div class="realisation-thumb">Site + réservation</div>
           <div class="realisation-body"><h4>Site avec prise de RDV</h4><p>Agenda relié, rappel automatique la veille</p></div>
-        </div>
+        </a>
       </div>
-      <p style="margin-top:22px;"><a class="btn btn--contour" href="#cta">Demander à voir les 10 sites de démonstration</a></p>
+      <p style="margin-top:22px;"><a class="btn btn--contour" href="https://metastep.fr/realisations" target="_blank" rel="noopener">Voir les 10 sites de démonstration</a></p>
     </div>
   </section>
 
