@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MetaStep · maquette de comparaison (non en ligne)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nuit:#191B1F;
+    --nuit2:#22252B;
+    --papier:#F6F2EA;
+    --papier2:#ECE6D8;
+    --ambre:#E0772E;
+    --ambre-fonce:#B85A1D;
+    --acier:#4C6578;
+    --vert:#3F7A52;
+    --rouge:#C8432E;
+    --texte-clair:#F6F2EA;
+    --texte-sombre:#23262B;
+    --ombre:0 18px 40px -20px rgba(0,0,0,.45);
+    --rayon:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Work Sans', system-ui, sans-serif;
+    background:var(--papier);
+    color:var(--texte-sombre);
+    line-height:1.5;
+  }
+  h1,h2,h3,.titre-condense{
+    font-family:'Barlow Condensed', system-ui, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    line-height:1.05;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .conteneur{max-width:1120px;margin:0 auto;padding:0 20px;}
+  .section{padding:72px 0;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ambre-fonce);margin-bottom:12px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--ambre);display:inline-block;}
+  .h2{font-size:clamp(28px,4vw,42px);margin:0 0 16px;color:var(--texte-sombre);}
+  .lead{font-size:18px;max-width:640px;color:#4A4D53;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;justify-content:center;
+    padding:15px 26px;border-radius:999px;font-weight:700;font-size:16px;
+    text-decoration:none;border:2px solid transparent;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn--ambre{background:var(--ambre);color:#191205;box-shadow:0 10px 24px -10px rgba(224,119,46,.7);}
+  .btn--sombre{background:var(--nuit);color:var(--papier);}
+  .btn--contour{background:transparent;border-color:var(--nuit);color:var(--nuit);}
+  .btn--large{padding:18px 32px;font-size:18px;}
+
+  /* bandeau maquette */
+  .bandeau-maquette{
+    background:var(--nuit);color:var(--papier);text-align:center;
+    font-size:13px;padding:10px 16px;font-weight:600;
+  }
+  .bandeau-maquette strong{color:var(--ambre);}
+
+  /* HEADER */
+  header.ms{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,242,234,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid #E1D9C6;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .logo img{height:30px;width:auto;}
+  .logo span{font-family:'Barlow Condensed';font-weight:800;font-size:20px;letter-spacing:.04em;color:var(--texte-sombre);}
+  .nav-liens{display:none;gap:28px;font-weight:600;font-size:15px;}
+  .nav-liens a{text-decoration:none;color:var(--texte-sombre);}
+  .nav-liens a:hover{color:var(--ambre-fonce);}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
+  .tel-btn{display:flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;color:var(--texte-sombre);font-size:15px;}
+  .tel-btn svg{color:var(--ambre-fonce);}
+  @media(min-width:900px){ .nav-liens{display:flex;} }
+
+  /* HERO */
+  .hero{padding:56px 0 48px;background:linear-gradient(180deg,#FBF8F2 0%, var(--papier) 100%);}
+  .hero-grid{display:grid;gap:40px;align-items:center;}
+  @media(min-width:960px){ .hero-grid{grid-template-columns:1.05fr .95fr;} }
+  .hero h1{font-size:clamp(34px,5.4vw,58px);margin:0 0 20px;color:var(--texte-sombre);}
+  .hero h1 em{font-style:normal;color:var(--ambre-fonce);}
+  .hero p.lead{margin-bottom:28px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px;}
+  .hero-trust{display:flex;flex-wrap:wrap;gap:22px;}
+  .trust-item{font-size:14px;font-weight:600;color:#55585E;display:flex;align-items:center;gap:8px;}
+  .trust-item svg{color:var(--vert);flex:none;}
+
+  /* carte "ecran" mockup */
+  .ecran-mock{
+    background:var(--nuit);border-radius:18px;padding:18px;box-shadow:var(--ombre);
+    position:relative;overflow:hidden;
+  }
+  .ecran-mock::before{
+    content:"ASSISTANT · EN DIRECT";position:absolute;top:14px;right:18px;
+    font-size:10px;letter-spacing:.14em;color:var(--ambre);font-weight:700;
+  }
+  .ecran-mock__barre{display:flex;gap:6px;margin-bottom:14px;}
+  .dot{width:9px;height:9px;border-radius:50%;background:#3A3D44;}
+  .ecran-mock__ligne{background:#2B2E35;border-radius:10px;padding:12px 14px;margin-bottom:9px;font-size:13.5px;color:#D9D6CC;}
+  .ecran-mock__ligne b{color:#fff;}
+  .ecran-mock__tag{display:inline-block;background:var(--ambre);color:#1a1205;font-weight:700;font-size:11px;padding:3px 9px;border-radius:999px;margin-left:8px;}
+  .ecran-mock__tag--vert{background:var(--vert);color:#fff;}
+
+  /* PROOF BAR */
+  .proof{background:var(--nuit);color:var(--papier);}
+  .proof-list{display:grid;gap:18px;padding:22px 0;text-align:center;}
+  @media(min-width:760px){ .proof-list{grid-template-columns:repeat(3,1fr);text-align:left;} }
+  .proof-list strong{display:block;font-family:'Barlow Condensed';font-size:19px;letter-spacing:.03em;color:var(--ambre);}
+  .proof-list span{font-size:13.5px;color:#C9C6BC;}
+
+  /* OFFRES - deux piliers */
+  .piliers{display:grid;gap:26px;margin-top:40px;}
+  @media(min-width:860px){ .piliers{grid-template-columns:1fr 1fr;} }
+  .pilier{
+    background:#fff;border:1px solid #E7E0CF;border-radius:20px;padding:34px;
+    display:flex;flex-direction:column;gap:18px;box-shadow:0 1px 0 #fff inset;
+  }
+  .pilier--accent{border:2px solid var(--ambre);}
+  .pilier-badge{
+    display:inline-flex;align-self:flex-start;background:var(--papier2);color:var(--texte-sombre);
+    font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;
+  }
+  .pilier h3{font-size:30px;margin:0;}
+  .pilier .prix{font-family:'Barlow Condensed';font-size:22px;font-weight:700;color:var(--ambre-fonce);}
+  .pilier ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .pilier li{display:flex;gap:10px;font-size:15.5px;}
+  .pilier li svg{flex:none;color:var(--vert);margin-top:3px;}
+  .pilier-cta{margin-top:auto;}
+
+  /* CAS D'USAGE - journee */
+  .journee{position:relative;margin-top:44px;}
+  .journee-ligne{position:absolute;left:19px;top:6px;bottom:6px;width:2px;background:#E1D9C6;}
+  @media(min-width:760px){ .journee-ligne{left:50%;} }
+  .moment{display:grid;gap:14px;position:relative;padding:0 0 36px 52px;}
+  @media(min-width:760px){
+    .moment{grid-template-columns:1fr 1fr;padding-left:0;gap:40px;}
+    .moment:nth-child(even) .moment-card{order:2;}
+    .moment:nth-child(even) .moment-heure{order:1;text-align:right;}
+  }
+  .moment-heure{
+    position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;
+    background:var(--nuit);color:var(--ambre);display:flex;align-items:center;justify-content:center;
+    font-family:'Barlow Condensed';font-weight:700;font-size:12px;
+  }
+  @media(min-width:760px){
+    .moment-heure{position:static;width:auto;height:auto;background:none;color:var(--ambre-fonce);
+      font-size:17px;display:flex;align-items:center;}
+  }
+  .moment-card{
+    background:#fff;border:1px solid #E7E0CF;border-radius:16px;padding:22px 24px;
+  }
+  .moment-card h4{margin:0 0 8px;font-size:18px;font-family:'Work Sans';font-weight:700;text-transform:none;letter-spacing:0;}
+  .moment-card p{margin:0;font-size:15px;color:#52555B;}
+
+  /* TEMOIGNAGES */
+  .avis-disclaimer{
+    background:#FBF0DE;border:1px dashed var(--ambre-fonce);border-radius:12px;
+    padding:14px 18px;font-size:14px;color:#6B4A1E;margin-bottom:28px;font-weight:600;
+  }
+  .avis-grid{display:grid;gap:22px;}
+  @media(min-width:860px){ .avis-grid{grid-template-columns:repeat(3,1fr);} }
+  .avis-carte{background:#fff;border:1px solid #E7E0CF;border-radius:16px;padding:26px;position:relative;}
+  .avis-fictif{
+    position:absolute;top:-10px;left:20px;background:var(--rouge);color:#fff;font-size:11px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+  }
+  .avis-carte p.citation{font-size:16px;font-style:italic;color:var(--texte-sombre);margin:14px 0 18px;}
+  .avis-auteur{display:flex;align-items:center;gap:12px;}
+  .avis-avatar{width:40px;height:40px;border-radius:50%;background:var(--papier2);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--acier);font-family:'Barlow Condensed';}
+  .avis-auteur strong{display:block;font-size:14.5px;}
+  .avis-auteur span{font-size:13px;color:#777;}
+
+  /* PORTFOLIO TEASER */
+  .realisations-grid{display:grid;gap:18px;margin-top:32px;}
+  @media(min-width:760px){ .realisations-grid{grid-template-columns:repeat(3,1fr);} }
+  .realisation-card{border-radius:16px;overflow:hidden;border:1px solid #E7E0CF;background:#fff;}
+  .realisation-thumb{height:140px;background:linear-gradient(135deg,var(--acier),var(--nuit));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Barlow Condensed';font-size:14px;letter-spacing:.08em;text-transform:uppercase;}
+  .realisation-body{padding:16px 18px;}
+  .realisation-body h4{margin:0 0 4px;font-size:16px;}
+  .realisation-body p{margin:0;font-size:13.5px;color:#777;}
+
+  /* METHODE */
+  .methode-list{display:grid;gap:20px;margin-top:36px;}
+  @media(min-width:860px){ .methode-list{grid-template-columns:repeat(3,1fr);} }
+  .etape{background:#fff;border:1px solid #E7E0CF;border-radius:16px;padding:26px;}
+  .etape-num{font-family:'Barlow Condensed';font-size:40px;font-weight:800;color:var(--papier2);line-height:1;}
+  .etape h4{margin:14px 0 8px;font-size:19px;}
+  .etape p{margin:0;font-size:14.5px;color:#55585E;}
+
+  /* EVAN */
+  .evan{background:var(--nuit);color:var(--papier);}
+  .evan-grid{display:grid;gap:34px;align-items:center;}
+  @media(min-width:860px){ .evan-grid{grid-template-columns:200px 1fr;} }
+  .evan-photo{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid var(--ambre);margin:0 auto;}
+  .evan .eyebrow{color:var(--ambre);}
+  .evan h2{color:var(--papier);}
+  .evan p.lead{color:#CFCBC0;}
+  .evan-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .evan-tag{background:#2A2D34;border:1px solid #3A3D44;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid #E1D9C6;padding:18px 0;}
+  .faq-item summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-size:22px;color:var(--ambre-fonce);}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin:12px 0 0;color:#52555B;font-size:15px;max-width:720px;}
+
+  /* CTA FINAL */
+  .cta-final{background:linear-gradient(135deg,var(--ambre-fonce),var(--ambre));color:#1A1205;}
+  .cta-final .h2{color:#1A1205;}
+  .cta-box{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between;}
+  .cta-box p{max-width:480px;font-size:16px;color:#3A2A14;}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:14px;}
+
+  footer.ms{background:var(--nuit2);color:#B9B6AC;padding:34px 0;font-size:13.5px;}
+  .footer-inner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;}
+  .footer-inner a{text-decoration:none;color:#B9B6AC;}
+  .footer-inner a:hover{color:var(--ambre);}
+</style>
+</head>
+<body>
+
+<div class="bandeau-maquette">
+  MAQUETTE DE COMPARAISON — pas le site en ligne. Contenus et chiffres d'exemple marqués <strong>fictifs</strong> le cas échéant.
+</div>
+
+<header class="ms">
+  <div class="conteneur nav-inner">
+    <a class="logo" href="#haut">
+      <img src="assets/logo-metastep.png" alt="Logo MetaStep" width="30" height="30">
+      <span>METASTEP</span>
+    </a>
+    <nav class="nav-liens">
+      <a href="#offres">Offres</a>
+      <a href="#journee">Exemples</a>
+      <a href="#avis">Avis</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="tel-btn" href="tel:+33617667325">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>06 17 66 73 25</span>
+      </a>
+      <a class="btn btn--ambre" href="#cta">Audit gratuit</a>
+    </div>
+  </div>
+</header>
+
+<main id="haut">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="conteneur hero-grid">
+      <div>
+        <p class="eyebrow">Assistants IA et sites web pour PME du Nord</p>
+        <h1>Vos soirées vous appartiennent. <em>Pas vos mails.</em></h1>
+        <p class="lead">MetaStep installe des assistants qui trient vos mails, relancent vos devis et rangent vos documents, et construit le site qui vous ramène des demandes. Un seul interlocuteur, un prix affiché, chez vous dans le Nord.</p>
+        <div class="hero-actions">
+          <a class="btn btn--ambre btn--large" href="#cta">Réserver mon audit gratuit</a>
+          <a class="btn btn--contour btn--large" href="tel:+33617667325">Appeler maintenant</a>
+        </div>
+        <div class="hero-trust">
+          <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Douai, Cambrai, tout le Nord</span>
+          <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>BTP, commerce, industrie, services</span>
+          <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Sans engagement, résiliable chaque mois</span>
+        </div>
+      </div>
+
+      <div class="ecran-mock" aria-hidden="true">
+        <div class="ecran-mock__barre"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="ecran-mock__ligne">07:30 — <b>3 devis</b> à relire, 1 urgent (chantier Lefebvre)<span class="ecran-mock__tag">PRÊT</span></div>
+        <div class="ecran-mock__ligne">Facture Bois Nord rangée, écart de prix repéré <b>+6 %</b></div>
+        <div class="ecran-mock__ligne">Relance devis Carlier envoyée, J+3<span class="ecran-mock__tag ecran-mock__tag--vert">FAIT</span></div>
+        <div class="ecran-mock__ligne">Site : 2 demandes de devis reçues cette nuit <span class="ecran-mock__tag ecran-mock__tag--vert">NOUVEAU</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF BAR -->
+  <section class="proof">
+    <div class="conteneur proof-list">
+      <div><strong>≈ 20 h / mois</strong><span>rendues au dirigeant en moyenne sur le pack cœur</span></div>
+      <div><strong>7 à 10 jours</strong><span>pour un site en ligne, avec ou sans outil</span></div>
+      <div><strong>1 interlocuteur</strong><span>de l'audit à la maintenance, basé à Douai</span></div>
+    </div>
+  </section>
+
+  <!-- OFFRES : deux piliers -->
+  <section id="offres" class="section">
+    <div class="conteneur">
+      <p class="eyebrow">Ce que vous achetez</p>
+      <h2 class="h2">Deux façons simples de reprendre la main</h2>
+      <p class="lead">Pas de jargon, pas de « sur devis » mystère. Vous choisissez un point de départ, vous ajoutez ensuite si besoin.</p>
+
+      <div class="piliers">
+        <div class="pilier pilier--accent">
+          <span class="pilier-badge">Le plus choisi</span>
+          <h3>Assistants IA</h3>
+          <p class="prix">Dès 950 € HT d'installation (offre de lancement), puis 190 €/mois</p>
+          <ul>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Tri des mails avec réponses prêtes à valider</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Classement automatique des devis et factures</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Compte rendu chaque matin sur votre téléphone</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Surveillance 24/7, vous êtes prévenu en cas d'arrêt</li>
+          </ul>
+          <div class="pilier-cta"><a class="btn btn--sombre" href="#cta">Voir ce que ça changerait chez moi</a></div>
+        </div>
+
+        <div class="pilier">
+          <span class="pilier-badge">En ligne en 7 à 10 jours</span>
+          <h3>Sites web</h3>
+          <p class="prix">Dès 890 € HT, puis 29 €/mois sans engagement</p>
+          <ul>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Pensé téléphone, bouton d'appel visible partout</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Vos chantiers, votre zone, vos vrais tarifs</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Option outil : devis en ligne, simulateur, prise de RDV</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Hébergement et suivi inclus, résiliable chaque mois</li>
+          </ul>
+          <div class="pilier-cta"><a class="btn btn--contour" href="#realisations">Voir des exemples de sites</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAS D'USAGE : une journee -->
+  <section id="journee" class="section" style="background:var(--papier2);">
+    <div class="conteneur">
+      <p class="eyebrow">Concret, pas de discours</p>
+      <h2 class="h2">Une journée avec un assistant MetaStep</h2>
+      <p class="lead">Exemple d'une journée type chez un artisan du BTP une fois le pack cœur installé.</p>
+
+      <div class="journee">
+        <div class="journee-ligne"></div>
+
+        <div class="moment">
+          <div class="moment-heure">07:30</div>
+          <div class="moment-card">
+            <h4>Le compte rendu du matin arrive sur le téléphone</h4>
+            <p>Avant même le café : ce qui est urgent, ce qui a été traité dans la nuit, ce qui attend une décision. Aucune boîte mail à ouvrir pour le savoir.</p>
+          </div>
+        </div>
+
+        <div class="moment">
+          <div class="moment-heure">09:15</div>
+          <div class="moment-card">
+            <h4>Un mail de demande de devis arrive</h4>
+            <p>L'assistant le classe, prépare une réponse avec les bonnes questions (adresse, surface, délai). Le dirigeant relit, corrige un mot, envoie.</p>
+          </div>
+        </div>
+
+        <div class="moment">
+          <div class="moment-heure">14:00</div>
+          <div class="moment-card">
+            <h4>Le site reçoit une demande via le simulateur de prix</h4>
+            <p>Un visiteur a chiffré sa toiture sur le site, laissé son numéro. L'assistant envoie l'estimation par mail et prévient le dirigeant par SMS.</p>
+          </div>
+        </div>
+
+        <div class="moment">
+          <div class="moment-heure">18:30</div>
+          <div class="moment-card">
+            <h4>Retour du chantier, rien n'a été oublié</h4>
+            <p>Les devis sans réponse depuis 3 jours ont été relancés automatiquement. La boîte mail est rangée. La soirée commence sans ordinateur.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES POTENTIELS -->
+  <section id="avis" class="section">
+    <div class="conteneur">
+      <p class="eyebrow">Avis clients</p>
+      <h2 class="h2">Ce que pourraient dire vos futurs témoignages</h2>
+      <p class="lead">Aucun client réel ni chiffre n'est inventé ici : ce sont des exemples de format, à remplacer par de vrais témoignages dès les premières installations (offre de lancement : 5 places contre un témoignage filmé).</p>
+
+      <div class="avis-disclaimer">Les 3 cartes ci-dessous sont des exemples fictifs de mise en forme, pas de vrais avis clients.</div>
+
+      <div class="avis-grid">
+        <div class="avis-carte">
+          <span class="avis-fictif">Exemple fictif</span>
+          <p class="citation">« Je ne regarde plus ma boîte mail le soir. Les devis urgents remontent tout seuls. »</p>
+          <div class="avis-auteur">
+            <div class="avis-avatar">DC</div>
+            <div><strong>Dirigeant, couverture (exemple)</strong><span>Entreprise fictive · 8 salariés · Douaisis</span></div>
+          </div>
+        </div>
+        <div class="avis-carte">
+          <span class="avis-fictif">Exemple fictif</span>
+          <p class="citation">« Le site a commencé à ramener des demandes dès la première semaine, sans rien faire de plus. »</p>
+          <div class="avis-auteur">
+            <div class="avis-avatar">MC</div>
+            <div><strong>Dirigeante, maçonnerie (exemple)</strong><span>Entreprise fictive · 15 salariés · Cambrésis</span></div>
+          </div>
+        </div>
+        <div class="avis-carte">
+          <span class="avis-fictif">Exemple fictif</span>
+          <p class="citation">« Un seul interlocuteur, un prix clair dès le départ. C'est ce qui m'a décidé. »</p>
+          <div class="avis-auteur">
+            <div class="avis-avatar">EP</div>
+            <div><strong>Dirigeant, électricité (exemple)</strong><span>Entreprise fictive · 6 salariés · Nord</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REALISATIONS TEASER -->
+  <section id="realisations" class="section" style="background:var(--papier2);">
+    <div class="conteneur">
+      <p class="eyebrow">Déjà construits</p>
+      <h2 class="h2">Des exemples de sites, pas des promesses</h2>
+      <p class="lead">Sites de démonstration (entreprises fictives) pour montrer le rendu réel avant de vous engager.</p>
+      <div class="realisations-grid">
+        <div class="realisation-card">
+          <div class="realisation-thumb">Vitrine BTP</div>
+          <div class="realisation-body"><h4>Site vitrine couverture</h4><p>5 pages, bouton d'appel, zone d'intervention</p></div>
+        </div>
+        <div class="realisation-card">
+          <div class="realisation-thumb">Site + simulateur</div>
+          <div class="realisation-body"><h4>Site avec devis en ligne</h4><p>Simulateur de prix, demande qualifiée par mail</p></div>
+        </div>
+        <div class="realisation-card">
+          <div class="realisation-thumb">Site + réservation</div>
+          <div class="realisation-body"><h4>Site avec prise de RDV</h4><p>Agenda relié, rappel automatique la veille</p></div>
+        </div>
+      </div>
+      <p style="margin-top:22px;"><a class="btn btn--contour" href="#cta">Demander à voir les 10 sites de démonstration</a></p>
+    </div>
+  </section>
+
+  <!-- METHODE -->
+  <section class="section">
+    <div class="conteneur">
+      <p class="eyebrow">Comment on avance</p>
+      <h2 class="h2">Trois étapes, aucune surprise</h2>
+      <div class="methode-list">
+        <div class="etape">
+          <div class="etape-num">01</div>
+          <h4>L'audit gratuit</h4>
+          <p>30 minutes en visio ou 90 minutes chez vous. On regarde vos mails et vos journées, sans rien garder.</p>
+        </div>
+        <div class="etape">
+          <div class="etape-num">02</div>
+          <h4>L'installation</h4>
+          <p>Devis le soir même, au prix de la grille. Installation chez vous ou hébergée, en quelques jours.</p>
+        </div>
+        <div class="etape">
+          <div class="etape-num">03</div>
+          <h4>Le suivi mensuel</h4>
+          <p>Surveillance 24/7, ajustements, rapport mensuel. Vous arrêtez quand vous voulez.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVAN -->
+  <section class="evan section">
+    <div class="conteneur evan-grid">
+      <img class="evan-photo" src="assets/evan.webp" alt="Evan Marlière, fondateur de MetaStep" width="160" height="160">
+      <div>
+        <p class="eyebrow">Qui je suis</p>
+        <h2 class="h2">Un interlocuteur, basé à Douai, qui installe lui-même</h2>
+        <p class="lead">Evan Marlière, fondateur de MetaStep. Je travaille seul, sur le terrain, avec des dirigeants de PME du BTP, du commerce, de l'industrie et des services du Nord. Je n'installe que ce que je peux montrer en vidéo.</p>
+        <div class="evan-tags">
+          <span class="evan-tag">Interlocuteur unique</span>
+          <span class="evan-tag">Réponse sous 24 h ouvrées</span>
+          <span class="evan-tag">Données hébergées en France</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="conteneur">
+      <p class="eyebrow">Questions fréquentes</p>
+      <h2 class="h2">Ce que les dirigeants demandent avant de se lancer</h2>
+
+      <details class="faq-item" open>
+        <summary>Je n'y connais rien en informatique, c'est grave ?</summary>
+        <p>Non. L'installation et les réglages sont faits par mes soins. Vous recevez un compte rendu simple, en français courant, sans terme technique.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Est-ce que je peux arrêter quand je veux ?</summary>
+        <p>Oui. Le suivi mensuel est résiliable à tout moment, sans engagement. Seule l'installation de départ est due.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Où sont mes données ?</summary>
+        <p>Hébergées en France, chez vous si vous préférez. Sauvegarde chaque nuit, restitution complète si vous arrêtez.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Combien de temps avant de voir un résultat ?</summary>
+        <p>Les assistants sont en place en 5 à 15 jours selon la brique. Un site vitrine est en ligne en 7 jours, un site avec outil en 10 jours.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Est-ce que ça remplace quelqu'un de mon équipe ?</summary>
+        <p>Non, ça libère du temps sur les tâches répétitives (tri, classement, relances) pour que vous et votre équipe restiez sur le chantier et les clients.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta" class="section cta-final">
+    <div class="conteneur cta-box">
+      <div>
+        <h2 class="h2">30 minutes pour savoir si ça vaut le coup</h2>
+        <p>Audit gratuit, sans engagement. Si rien ne vous fait gagner au moins 10 heures par mois, je vous le dis et on en reste là.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn--sombre btn--large" href="https://calendly.com/metastep/rdv" rel="noopener" target="_blank">Réserver mon audit gratuit</a>
+        <a class="btn btn--contour btn--large" href="tel:+33617667325" style="border-color:#1A1205;color:#1A1205;">06 17 66 73 25</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ms">
+  <div class="conteneur footer-inner">
+    <span>METASTEP · Douai, Nord · maquette de comparaison, non indexée</span>
+    <nav style="display:flex;gap:18px;">
+      <a href="mailto:contact@metastep.fr">contact@metastep.fr</a>
+      <a href="https://www.linkedin.com/in/evan-marliere/" rel="noopener" target="_blank">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
